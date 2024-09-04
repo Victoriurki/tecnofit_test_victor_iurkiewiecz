@@ -4,18 +4,15 @@ import 'package:tecnofit_test_victor_iurkiewiecz/core/adapters/secure_storage/se
 import 'package:tecnofit_test_victor_iurkiewiecz/core/adapters/secure_storage/secure_storage_keys.dart';
 
 class SessionManager {
-   final _secureStorage = AppGetIt.instance.get<SecureStorageAdapter>();
+  final _secureStorage = AppGetIt.instance.get<SecureStorageAdapter>();
 
   Future<void> saveSession({
-    required String token, 
-    required String userId,
-   required String? password,
+    required String token,
+    required String email,
+    required String? password,
   }) async {
-    await _secureStorage.save(
-        key: SecureStorageKeys.token, value: token);   
-    await _secureStorage.save(
-        key: SecureStorageKeys.userId,
-        value: userId);
+    await _secureStorage.save(key: SecureStorageKeys.token, value: token);
+    await _secureStorage.save(key: SecureStorageKeys.email, value: email);
     if (password != null) {
       await _secureStorage.save(
           key: SecureStorageKeys.password, value: password);
@@ -26,8 +23,8 @@ class SessionManager {
   Future<void> clearSession() async {
     try {
       await _secureStorage.delete(key: SecureStorageKeys.token);
-      await _secureStorage.delete(key: SecureStorageKeys.userId);
-      await _secureStorage.delete(key: SecureStorageKeys.password);      
+      await _secureStorage.delete(key: SecureStorageKeys.email);
+      await _secureStorage.delete(key: SecureStorageKeys.password);
       return;
     } catch (e) {
       if (kDebugMode) {

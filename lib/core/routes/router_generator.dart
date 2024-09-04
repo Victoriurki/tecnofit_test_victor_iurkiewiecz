@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tecnofit_test_victor_iurkiewiecz/core/routes/app_routes.dart';
+import 'package:tecnofit_test_victor_iurkiewiecz/features/login/mobile/login_page_mobile.dart';
 
 class RouterGenerator {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -12,6 +13,10 @@ class RouterGenerator {
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
     routes: [
+      GoRoute(
+          path: AppRoutes.login,
+          pageBuilder: (context, state) =>
+              buildAnimation(state, const LoginPageMobile())),
       GoRoute(
           path: AppRoutes.home,
           pageBuilder: (context, state) => buildAnimation(
